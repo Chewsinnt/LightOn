@@ -1,0 +1,1986 @@
+#N canvas 351 67 1150 817 10;
+#X obj 20 60 cnv 15 149 279 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 30 50 cnv 15 149 279 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 200 60 cnv 15 729 709 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 210 50 cnv 15 729 709 empty empty empty 20 12 0 14 #5e5e5e #404040
+0;
+#X obj 230 70 cnv 15 690 130 empty empty empty 20 12 0 14 #ff8585 #404040
+0;
+#X obj 430 640 cnv 15 289 99 empty empty empty 20 12 0 14 #ffd479 #404040
+0;
+#X obj 290 530 cnv 15 569 99 empty empty empty 20 12 0 14 #ffd479 #404040
+0;
+#X obj 230 220 cnv 15 690 299 empty empty empty 20 12 0 14 #ffd479
+#404040 0;
+#N canvas 788 204 565 632 pianoNotes 0;
+#X obj 130 30 cnv 15 268 29 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 140 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 170 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 200 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 230 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 260 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 290 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 320 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 350 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 140 400 261.626;
+#X msg 170 420 293.665;
+#X msg 200 400 329.628;
+#X msg 230 420 349.228;
+#X msg 260 400 391.995;
+#X msg 290 420 440;
+#X msg 320 400 493.883;
+#X msg 350 420 523.251;
+#X floatatom 230 470 5 0 0 0 - - -, f 5;
+#X obj 140 310 select 1 2 3 4 5 6 7 8;
+#X obj 140 130 r freq;
+#X obj 300 530 s freq2;
+#X floatatom 140 280 0 0 0 0 - - -;
+#X obj 140 220 line;
+#X obj 140 250 int;
+#X msg 140 190 \$1 100;
+#X floatatom 200 280 5 0 0 0 - - -, f 5;
+#X obj 140 380 s n1;
+#X obj 170 380 s n2;
+#X obj 200 380 s n3;
+#X obj 230 380 s n4;
+#X obj 260 380 s n5;
+#X obj 290 380 s n6;
+#X obj 320 380 s n7;
+#X obj 350 380 s n8;
+#X floatatom 140 160 5 0 0 0 - - -, f 5;
+#X obj 300 500 * 4;
+#X obj 160 500 * 1;
+#X obj 230 500 * 2;
+#X obj 160 530 s noteoc1;
+#X obj 230 530 s noteoc2;
+#X floatatom 200 130 5 0 0 0 - - -, f 5;
+#X obj 200 100 r rand;
+#X obj 200 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 925 394 310 287 bpm 0;
+#X obj 50 90 inlet;
+#X obj 150 190 metro;
+#X msg 50 150 tempo \$1 permin;
+#X obj 150 220 outlet;
+#X obj 50 120 * 2;
+#X obj 150 110 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 150 80 r onoff;
+#X msg 170 150 tempo 120 permin;
+#X obj 60 30 cnv 15 196 16 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 60 30 convert auto pilot values to BPM;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 2 0;
+#X connect 5 0 7 0;
+#X connect 5 0 1 0;
+#X connect 6 0 5 0;
+#X connect 7 0 1 0;
+#X restore 200 160 pd bpm;
+#X obj 200 250 random 12;
+#X obj 230 190 r 0tometro;
+#X obj 300 190 r 1tometro;
+#X obj 200 220 spigot;
+#X text 130 30 receive brightness values from [pd button 3] and send
+notes frequency to [pd leadNotes], f 44;
+#X text 30 150 brightness value from [pd button3], f 17;
+#X text 280 300 select from 1-8 and send note frequency to [pd leadNotes]
+, f 30;
+#X text 240 130 auto pilot values from [pd button4];
+#X text 250 160 convert that value to the actual BPM;
+#X text 270 250 output random numbers from 0-12 at bpm speed;
+#X text 390 380 note's frequencies;
+#X text 150 550 send frequencie to [pd leadNotes];
+#X connect 1 0 9 0;
+#X connect 1 0 26 0;
+#X connect 2 0 10 0;
+#X connect 2 0 27 0;
+#X connect 3 0 11 0;
+#X connect 3 0 28 0;
+#X connect 4 0 12 0;
+#X connect 4 0 29 0;
+#X connect 5 0 13 0;
+#X connect 5 0 30 0;
+#X connect 6 0 14 0;
+#X connect 6 0 31 0;
+#X connect 7 0 15 0;
+#X connect 7 0 32 0;
+#X connect 8 0 16 0;
+#X connect 8 0 33 0;
+#X connect 9 0 17 0;
+#X connect 10 0 17 0;
+#X connect 11 0 17 0;
+#X connect 12 0 17 0;
+#X connect 13 0 17 0;
+#X connect 14 0 17 0;
+#X connect 15 0 17 0;
+#X connect 16 0 17 0;
+#X connect 17 0 35 0;
+#X connect 17 0 36 0;
+#X connect 17 0 37 0;
+#X connect 18 0 1 0;
+#X connect 18 1 2 0;
+#X connect 18 2 3 0;
+#X connect 18 3 4 0;
+#X connect 18 4 5 0;
+#X connect 18 5 6 0;
+#X connect 18 6 7 0;
+#X connect 18 7 8 0;
+#X connect 19 0 34 0;
+#X connect 21 0 18 0;
+#X connect 22 0 23 0;
+#X connect 23 0 21 0;
+#X connect 24 0 22 0;
+#X connect 25 0 18 0;
+#X connect 34 0 24 0;
+#X connect 35 0 20 0;
+#X connect 36 0 38 0;
+#X connect 37 0 39 0;
+#X connect 40 0 43 0;
+#X connect 41 0 40 0;
+#X connect 42 0 47 0;
+#X connect 43 0 42 0;
+#X connect 44 0 25 0;
+#X connect 45 0 47 1;
+#X connect 46 0 47 1;
+#X connect 47 0 44 0;
+#X restore 60 200 pd pianoNotes;
+#N canvas 1213 230 423 431 pitchShifter 0;
+#X obj 150 230 +;
+#X obj 200 260 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 150 320 spigot;
+#X obj 200 230 r yokt;
+#X obj 270 290 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 270 320 s btofreq;
+#X obj 150 350 s spigottofreq;
+#X obj 150 290 line;
+#X msg 150 260 \$1 100;
+#X obj 150 200 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 150 170 metro 100;
+#X obj 80 170 r freqplus;
+#X obj 220 140 r yokyok;
+#X floatatom 220 170 5 0 0 0 - - -, f 5;
+#X obj 220 200 s pitchshiftdis;
+#X obj 200 320 s metro100;
+#X obj 150 140 r metro100;
+#X obj 110 30 cnv 15 214 82 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 110 30 receive toggle from [pd button7] and accelerometer values
+from [pd midiInput] \, plus that values with current frequency value
+\, then send the final value back to [pd pitchShifter], f 35;
+#X text 40 150 current frequency;
+#X text 260 170 accelerometer values;
+#X text 50 230 plus each other;
+#X text 80 370 send final value back to [pd pitchShifter];
+#X connect 0 0 8 0;
+#X connect 1 0 4 0;
+#X connect 1 0 2 1;
+#X connect 1 0 15 0;
+#X connect 2 0 6 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 7 0 2 0;
+#X connect 8 0 7 0;
+#X connect 9 0 0 0;
+#X connect 10 0 9 0;
+#X connect 11 0 0 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 13 0 0 1;
+#X connect 16 0 10 0;
+#X restore 60 260 pd pitchShifter;
+#N canvas 405 125 702 764 leadSyn 0;
+#X obj 220 540 *~;
+#X obj 150 480 *~;
+#X obj 280 480 *~;
+#X obj 220 710 dac~;
+#X floatatom 220 280 5 0 0 0 - - -, f 5;
+#X obj 220 100 r btofreq;
+#X obj 350 190 r spigottofreq;
+#X obj 310 450 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 180 450 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X msg 180 420 0;
+#X msg 310 420 0;
+#X obj 180 480 s saw;
+#X obj 310 480 s sine;
+#X obj 220 600 *~;
+#X msg 350 420 0;
+#X obj 350 390 select 0;
+#X obj 350 360 r closesine;
+#X obj 210 420 r opensaw;
+#X obj 150 330 phasor~ 440;
+#X obj 280 330 osc~ 440;
+#X obj 220 160 float;
+#X obj 220 130 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#N canvas 1221 296 289 190 leadSyntoggle 0;
+#X obj 110 70 r onoff;
+#X obj 110 100 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 110 130 s closesine;
+#X obj 190 130 s opensaw;
+#X obj 60 130 outlet;
+#X obj 50 30 cnv 15 196 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 50 30 receive toggle from [pd botton8];
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 1 0 4 0;
+#X restore 280 540 pd leadSyntoggle;
+#N canvas 1311 421 308 338 volumeCutoff 0;
+#X floatatom 70 190 5 0 0 0 - - -, f 5;
+#X obj 70 160 r cutoff;
+#X obj 70 220 spigot;
+#X obj 130 190 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 130 70 r onoff;
+#X obj 160 160 r offopran;
+#X obj 130 220 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 160 220 r cutofflv;
+#X floatatom 130 250 5 0 0 0 - - -, f 5;
+#X obj 150 130 r 1tonote;
+#X obj 140 100 r 0tonote;
+#X obj 70 250 outlet;
+#X obj 130 280 outlet;
+#X obj 30 30 cnv 15 244 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 30 30 receive values from [pd cutoffThreshold];
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 1;
+#X connect 3 0 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 0;
+#X connect 6 0 8 0;
+#X connect 7 0 8 0;
+#X connect 8 0 12 0;
+#X connect 9 0 3 0;
+#X connect 10 0 3 0;
+#X restore 280 570 pd volumeCutoff;
+#N canvas 0 25 186 358 lowpassValue 0;
+#X obj 50 40 r lop;
+#X floatatom 50 250 5 0 0 0 - - -, f 5;
+#X obj 50 100 * -1;
+#X obj 50 70 * 3000;
+#X obj 50 130 + 3000;
+#X obj 50 160 max 100;
+#X obj 50 220 line;
+#X msg 50 190 \$1 100;
+#X obj 50 280 outlet;
+#X connect 0 0 3 0;
+#X connect 1 0 8 0;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 7 0;
+#X connect 6 0 1 0;
+#X connect 7 0 6 0;
+#X restore 0 0 pd lowpassValue;
+#N canvas 1184 328 319 342 leadReverb 0;
+#X obj 100 110 rev2~ 100 90 3000 20;
+#X obj 140 260 *~;
+#X obj 100 260 *~;
+#X floatatom 180 170 5 0 0 0 - - -, f 5;
+#X obj 180 140 r rev;
+#X obj 180 230 line~;
+#X msg 180 200 \$1 100;
+#X obj 100 80 inlet~;
+#X obj 100 290 outlet~;
+#X obj 160 290 outlet~;
+#X obj 30 30 cnv 15 255 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 30 30 reverb aux for sine and saw-tooth wave osc;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 9 0;
+#X connect 2 0 8 0;
+#X connect 3 0 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 1 1;
+#X connect 5 0 2 1;
+#X connect 6 0 5 0;
+#X connect 7 0 0 0;
+#X restore 240 670 pd leadReverb;
+#N canvas 963 391 520 406 leadNotes 0;
+#X obj 230 350 s freqplus;
+#X obj 50 100 r noteoc1;
+#X obj 180 100 r noteoc2;
+#X floatatom 50 130 5 0 0 0 - - -, f 5;
+#X floatatom 180 130 5 0 0 0 - - -, f 5;
+#X obj 180 160 spigot;
+#X obj 220 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 50 160 spigot;
+#X obj 90 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X floatatom 310 130 5 0 0 0 - - -, f 5;
+#X obj 310 100 r freq2;
+#X obj 310 160 spigot;
+#X obj 350 130 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X floatatom 180 310 5 0 0 0 - - -, f 5;
+#X obj 220 190 select 1;
+#X msg 220 220 0;
+#X obj 350 190 select 1;
+#X msg 350 220 0;
+#X obj 50 190 select 1;
+#X msg 50 220 0;
+#X obj 100 160 s disnoc1;
+#X obj 230 160 s disnoc2;
+#X obj 360 160 s disnoc3;
+#X obj 120 100 r 1tooc1;
+#X obj 250 100 r 1tooc2;
+#X obj 370 100 r 1tooc3;
+#X obj 430 100 r 0tooc3;
+#X obj 180 350 outlet;
+#X obj 90 350 s freqtolead;
+#X obj 120 30 cnv 15 273 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 120 30 receive frequency values from [pd pianoNotes] and send
+them to [pd leadSyn], f 45;
+#X connect 1 0 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 7 0;
+#X connect 4 0 5 0;
+#X connect 5 0 13 0;
+#X connect 6 0 5 1;
+#X connect 6 0 14 0;
+#X connect 6 0 21 0;
+#X connect 7 0 13 0;
+#X connect 8 0 7 1;
+#X connect 8 0 18 0;
+#X connect 8 0 20 0;
+#X connect 9 0 11 0;
+#X connect 10 0 9 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 1;
+#X connect 12 0 16 0;
+#X connect 12 0 22 0;
+#X connect 13 0 0 0;
+#X connect 13 0 27 0;
+#X connect 13 0 28 0;
+#X connect 14 0 15 0;
+#X connect 15 0 8 0;
+#X connect 16 0 17 0;
+#X connect 17 0 6 0;
+#X connect 18 0 19 0;
+#X connect 19 0 12 0;
+#X connect 23 0 8 0;
+#X connect 24 0 6 0;
+#X connect 25 0 12 0;
+#X connect 26 0 12 0;
+#X restore 270 190 pd leadNotes;
+#X obj 270 130 r freqtolead;
+#N canvas 1263 366 450 287 waveChange 0;
+#X obj 135 100 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 165 190 select 1 2;
+#X obj 135 70 r oscchange;
+#X obj 135 130 cup;
+#X floatatom 165 160 5 0 0 0 - - -, f 5;
+#X text 55 150 count bang times;
+#X obj 165 130 expr if($f1 < 3 \, $f1 \, 1);
+#X obj 150 230 outlet;
+#X obj 210 230 outlet;
+#X text 205 150 if the button has been pressed for 2 times \, start
+count from 1 again, f 35;
+#X obj 80 70 r onoff;
+#X obj 90 30 cnv 15 249 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 90 30 select between sine or saw-tooth wave osc;
+#X connect 0 0 3 0;
+#X connect 1 0 7 0;
+#X connect 1 1 8 0;
+#X connect 2 0 0 0;
+#X connect 3 0 6 0;
+#X connect 4 0 1 0;
+#X connect 6 0 3 0;
+#X connect 6 0 4 0;
+#X connect 10 0 0 0;
+#X restore 180 390 pd waveChange;
+#N canvas 1216 356 324 239 leadVolume 0;
+#X obj 120 120 line;
+#X floatatom 120 150 5 0 0 0 - - -, f 5;
+#X msg 120 90 \$1 100;
+#X obj 120 60 r level;
+#X obj 120 180 s chordlevel;
+#X obj 210 180 s cutofflv;
+#X obj 70 180 outlet;
+#X obj 30 20 cnv 15 261 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 30 20 receive brightness values from [pd button1];
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 1 0 6 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X restore 280 510 pd leadVolume;
+#X text 110 0 <-- low-pass filter (unused);
+#X obj 270 250 line;
+#X msg 270 220 \$1 10;
+#X obj 180 40 cnv 15 363 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 180 40 main patch for lead synthesiser both sine and saw-tooth
+wave;
+#X text 290 100 receive bang from [pd pitchShifter];
+#X text 350 130 receive float from [pd leadNotes];
+#X text 450 190 receive float from [pd pitchShifter];
+#X text 330 670 subpatch for reverb aux;
+#X text 290 630 apply low-pass filter to osc output;
+#X text 380 560 subpatch for volume cut off and brightness value hit
+minimum threshold, f 38;
+#X text 390 530 subpatch for toggle on and off leadSyn when button
+8 is pressed, f 34;
+#X text 370 510 subpatch for assigning volume;
+#X text 270 170 subpatch for assigning frequency to sine and saw-tooth
+wave osc, f 63;
+#X text 40 390 subpatch for selecting either sine or saw osc, f 22
+;
+#X obj 220 630 lop~ 1000;
+#X connect 0 0 13 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 18 0;
+#X connect 4 0 19 0;
+#X connect 5 0 21 0;
+#X connect 6 0 32 0;
+#X connect 7 0 12 0;
+#X connect 7 0 2 1;
+#X connect 8 0 1 1;
+#X connect 8 0 11 0;
+#X connect 9 0 8 0;
+#X connect 10 0 7 0;
+#X connect 13 0 45 0;
+#X connect 14 0 7 0;
+#X connect 15 0 14 0;
+#X connect 16 0 15 0;
+#X connect 17 0 8 0;
+#X connect 18 0 1 0;
+#X connect 19 0 2 0;
+#X connect 20 0 4 0;
+#X connect 21 0 20 0;
+#X connect 22 0 13 1;
+#X connect 23 0 13 1;
+#X connect 23 1 13 1;
+#X connect 25 0 3 0;
+#X connect 25 1 3 1;
+#X connect 26 0 32 0;
+#X connect 27 0 20 1;
+#X connect 28 0 9 0;
+#X connect 28 0 7 0;
+#X connect 28 1 8 0;
+#X connect 28 1 10 0;
+#X connect 29 0 0 1;
+#X connect 31 0 4 0;
+#X connect 32 0 31 0;
+#X connect 45 0 3 0;
+#X connect 45 0 3 1;
+#X connect 45 0 25 0;
+#X restore 60 160 pd leadSyn;
+#N canvas 947 209 933 769 chordSyn 0;
+#X obj 370 340 osc~;
+#X obj 430 340 osc~;
+#X obj 490 340 osc~;
+#X obj 150 120 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 430 660 dac~;
+#X msg 90 180 261.626;
+#X msg 150 180 329.628;
+#X msg 210 180 391.995;
+#X obj 150 90 r chord1;
+#X obj 340 120 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 280 180 293.665;
+#X obj 340 90 r chord2;
+#X obj 530 120 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 530 90 r chord3;
+#X msg 470 180 329.628;
+#X msg 340 180 349.228;
+#X msg 400 180 391.995;
+#X msg 530 180 391.995;
+#X msg 590 180 523.251;
+#X obj 720 120 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 720 90 r chord4;
+#X msg 660 180 349.228;
+#X msg 720 180 440;
+#X msg 780 180 523.251;
+#X obj 430 580 lop~ 1000;
+#X obj 430 510 *~;
+#X obj 210 150 s dischord1;
+#X obj 400 150 s dischord2;
+#X obj 590 150 s dischord3;
+#X obj 780 150 s dischord4;
+#X obj 560 430 r mutechord;
+#X obj 490 430 r onchord;
+#X obj 490 470 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 430 550 *~;
+#N canvas 1088 301 303 351 chordReverb 0;
+#X obj 90 110 rev2~ 100 90 3000 20;
+#X obj 130 260 *~;
+#X obj 90 260 *~;
+#X floatatom 150 170 5 0 0 0 - - -, f 5;
+#X obj 150 140 r rev;
+#X obj 150 230 line~;
+#X msg 150 200 \$1 100;
+#X obj 90 80 inlet~;
+#X obj 90 290 outlet~;
+#X obj 150 290 outlet~;
+#X obj 60 30 cnv 15 183 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 60 30 reverb aux for chord sine wave;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 9 0;
+#X connect 2 0 8 0;
+#X connect 3 0 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 1 1;
+#X connect 5 0 2 1;
+#X connect 6 0 5 0;
+#X connect 7 0 0 0;
+#X restore 450 620 pd chordReverb;
+#X obj 370 370 *~ 0.4;
+#X obj 430 370 *~ 0.4;
+#X obj 490 370 *~ 0.4;
+#X obj 490 510 r chordlevel;
+#X obj 350 30 cnv 15 196 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 350 30 main patch for chord synthesiser;
+#X text 550 620 subpatch for reverb aux;
+#X text 500 580 apply low-pass filter to osc output;
+#X text 570 510 receive value from [pd leadVolume];
+#X text 490 410 toggle on and off chord;
+#X text 390 110 determine frequencies in the chords, f 21;
+#X connect 0 0 35 0;
+#X connect 1 0 36 0;
+#X connect 2 0 37 0;
+#X connect 3 0 5 0;
+#X connect 3 0 6 0;
+#X connect 3 0 7 0;
+#X connect 3 0 26 0;
+#X connect 5 0 0 0;
+#X connect 6 0 1 0;
+#X connect 7 0 2 0;
+#X connect 8 0 3 0;
+#X connect 9 0 10 0;
+#X connect 9 0 15 0;
+#X connect 9 0 16 0;
+#X connect 9 0 27 0;
+#X connect 10 0 0 0;
+#X connect 11 0 9 0;
+#X connect 12 0 14 0;
+#X connect 12 0 17 0;
+#X connect 12 0 18 0;
+#X connect 12 0 28 0;
+#X connect 13 0 12 0;
+#X connect 14 0 0 0;
+#X connect 15 0 1 0;
+#X connect 16 0 2 0;
+#X connect 17 0 1 0;
+#X connect 18 0 2 0;
+#X connect 19 0 21 0;
+#X connect 19 0 22 0;
+#X connect 19 0 23 0;
+#X connect 19 0 29 0;
+#X connect 20 0 19 0;
+#X connect 21 0 0 0;
+#X connect 22 0 1 0;
+#X connect 23 0 2 0;
+#X connect 24 0 4 0;
+#X connect 24 0 4 1;
+#X connect 24 0 34 0;
+#X connect 25 0 33 0;
+#X connect 30 0 32 0;
+#X connect 31 0 32 0;
+#X connect 32 0 25 1;
+#X connect 33 0 24 0;
+#X connect 34 0 4 0;
+#X connect 34 1 4 1;
+#X connect 35 0 25 0;
+#X connect 36 0 25 0;
+#X connect 37 0 25 0;
+#X connect 38 0 33 1;
+#X restore 60 180 pd chordSyn;
+#N canvas 445 193 534 674 midiInput 0;
+#X obj 110 50 cnv 15 280 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 430 110 ctlin 23 1;
+#X floatatom 430 140 5 0 0 0 - - -, f 5;
+#X floatatom 430 200 5 0 0 0 - - -, f 5;
+#X floatatom 430 320 5 0 0 0 - - -, f 5;
+#X obj 430 350 s yokyok;
+#X obj 40 140 vsl 79 226 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 3775 1;
+#N canvas 1307 225 237 375 ex 0;
+#X obj 70 180 line;
+#X msg 70 150 \$1 50;
+#X floatatom 70 210 5 0 0 0 - - -, f 5;
+#X obj 70 270 s lightde;
+#X obj 70 240 spigot;
+#X obj 120 210 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X floatatom 70 60 5 0 0 0 - - -, f 5;
+#X obj 70 90 /;
+#X floatatom 90 120 5 0 0 0 - - -, f 5;
+#X obj 120 150 s note;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 5 0 4 1;
+#X connect 6 0 7 0;
+#X connect 7 0 1 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X restore 0 0 pd ex;
+#X obj 180 170 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 310 170 5 0 0 0 - - -, f 5;
+#X obj 200 210 float;
+#X floatatom 330 250 5 0 0 0 - - -, f 5;
+#X obj 310 280 -;
+#X obj 310 310 max 0;
+#X floatatom 310 350 5 0 0 0 - - -, f 5;
+#X floatatom 180 350 5 0 0 0 - - -, f 5;
+#X obj 180 280 -;
+#X floatatom 210 410 5 0 0 0 - - -, f 5;
+#X obj 210 380 /;
+#X obj 210 440 spigot;
+#X obj 310 410 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 330 210 s dislightlv;
+#X obj 310 110 ctlin 22 1;
+#X obj 310 380 r onoff;
+#X obj 310 440 s setroomlv;
+#X obj 180 110 r setroomlv;
+#X obj 210 510 s lightlv;
+#X floatatom 210 470 5 0 0 0 - - -, f 5;
+#X obj 310 140 min 100;
+#X msg 180 250 100;
+#X obj 160 540 line;
+#X floatatom 160 570 5 0 0 0 - - -, f 5;
+#X obj 160 600 s lightlvmeter;
+#X obj 40 110 r lightlvmeter;
+#X obj 40 380 s mainfader;
+#X msg 160 510 \$1 100;
+#X obj 430 290 line;
+#X msg 430 260 \$1 100;
+#X text 40 0 <-- old one (unused);
+#X text 110 50 receive and convert midi input from the light detector
+and accelerometer into a usable value, f 46;
+#X text 420 380 accelerometer input value, f 13;
+#X text 20 410 main fader (light detector input value), f 21;
+#X text 190 310 minus current brightness level, f 16;
+#X text 250 470 true useable brightness level starts from 0 - 1, f
+23;
+#X text 210 140 Calibrate current room brightness level to 0, f 12
+;
+#X obj 430 230 * 5;
+#X obj 430 170 - 65;
+#X connect 1 0 2 0;
+#X connect 2 0 46 0;
+#X connect 3 0 45 0;
+#X connect 4 0 5 0;
+#X connect 6 0 34 0;
+#X connect 8 0 10 0;
+#X connect 8 0 29 0;
+#X connect 9 0 21 0;
+#X connect 9 0 10 1;
+#X connect 9 0 16 1;
+#X connect 9 0 12 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 1;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 18 0;
+#X connect 15 0 18 1;
+#X connect 16 0 15 0;
+#X connect 17 0 19 0;
+#X connect 18 0 17 0;
+#X connect 19 0 27 0;
+#X connect 20 0 19 1;
+#X connect 20 0 24 0;
+#X connect 22 0 28 0;
+#X connect 23 0 20 0;
+#X connect 25 0 8 0;
+#X connect 27 0 26 0;
+#X connect 27 0 35 0;
+#X connect 28 0 9 0;
+#X connect 29 0 16 0;
+#X connect 30 0 31 0;
+#X connect 31 0 32 0;
+#X connect 33 0 6 0;
+#X connect 35 0 30 0;
+#X connect 36 0 4 0;
+#X connect 37 0 36 0;
+#X connect 45 0 37 0;
+#X connect 46 0 3 0;
+#X restore 60 120 pd midiInput;
+#N canvas 30 63 716 332 buttons 0;
+#X obj 70 30 cnv 15 579 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X floatatom 230 120 5 0 0 0 - - -, f 5;
+#X obj 230 90 notein;
+#X obj 230 150 select 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+#N canvas 898 340 389 456 button1 0;
+#X obj 80 20 cnv 15 219 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 140 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 180 120 1;
+#X msg 140 120 0;
+#X floatatom 90 220 5 0 0 0 - - -, f 5;
+#X obj 90 190 spigot;
+#X obj 90 250 s level;
+#X obj 148 188 s byp;
+#X obj 60 250 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 6187 1;
+#X obj 140 220 s ui1;
+#X obj 60 400 s levelfdis;
+#X obj 70 160 r lightlv;
+#X obj 140 90 inlet;
+#X obj 180 90 inlet;
+#X text 90 280 send brightness value to volume controller, f 22;
+#X text 170 150 toggles the process of sending out values on and off
+, f 29;
+#X text 80 20 receive the midi value from button 1 and forward the
+brightness value to the volume controller [pd leadSyn], f 36;
+#X connect 1 0 5 1;
+#X connect 1 0 7 0;
+#X connect 1 0 9 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 8 0 10 0;
+#X connect 11 0 5 0;
+#X connect 12 0 3 0;
+#X connect 13 0 2 0;
+#X restore 80 220 pd button1;
+#N canvas 788 451 394 483 button4 0;
+#X obj 70 20 cnv 15 250 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 150 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 190 120 1;
+#X msg 150 120 0;
+#X floatatom 100 220 5 0 0 0 - - -, f 5;
+#X obj 100 190 spigot;
+#X obj 100 250 s lop;
+#X obj 160 190 s byp;
+#X obj 70 250 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 150 220 s ui4;
+#X obj 70 400 s filterfdis;
+#X obj 80 160 r lightlv;
+#X obj 150 90 inlet;
+#X obj 190 90 inlet;
+#X text 170 150 toggles the process of sending out values on and off
+, f 29;
+#X text 100 280 send brightness value to low-pass filter controller
+, f 26;
+#X text 70 20 receive the midi value from button 4 and forward the
+brightness value to low-pass filter controller [pd leadSyn], f 41
+;
+#X connect 1 0 5 1;
+#X connect 1 0 7 0;
+#X connect 1 0 9 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 8 0 10 0;
+#X connect 11 0 5 0;
+#X connect 12 0 3 0;
+#X connect 13 0 2 0;
+#X restore 0 0 pd button4;
+#N canvas 820 245 368 352 button7 0;
+#X obj 80 30 cnv 15 219 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 110 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 150 120 1;
+#X msg 110 120 0;
+#X obj 130 190 s yokt;
+#X obj 70 190 s ui7;
+#X obj 110 220 select 0 1;
+#X msg 110 260 1;
+#X msg 140 260 0;
+#X obj 70 290 s 1tonote;
+#X obj 140 290 s 0tonote;
+#X obj 110 90 inlet;
+#X obj 150 90 inlet;
+#X text 140 160 send toggle to [pd pitchShifter];
+#X text 80 30 receive the midi value from button 7 and send toggle
+to [pd pitchShifter], f 36;
+#X text 170 260 send value to [pd button3];
+#X connect 1 0 4 0;
+#X connect 1 0 5 0;
+#X connect 1 0 6 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 6 0 7 0;
+#X connect 6 1 8 0;
+#X connect 7 0 9 0;
+#X connect 8 0 10 0;
+#X connect 11 0 3 0;
+#X connect 12 0 2 0;
+#X restore 500 220 pd button7;
+#N canvas 792 241 439 512 button8 0;
+#X obj 100 30 cnv 15 244 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 180 180 s onoff;
+#X obj 150 210 s ui8;
+#X obj 130 150 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 160 330 select 1 2;
+#X obj 160 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 190 360 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 140 390 s welcome;
+#X obj 210 390 s bye;
+#X msg 260 390 0;
+#X obj 260 420 s mutechord;
+#X obj 100 420 s onchord;
+#X msg 100 390 1;
+#X msg 130 120 1;
+#X obj 150 180 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X msg 70 180 \; pd dsp 1;
+#X obj 130 90 inlet;
+#X obj 130 270 cup;
+#X floatatom 160 300 5 0 0 0 - - -, f 5;
+#X text 50 290 count bang times;
+#X obj 160 270 expr if($f1 < 3 \, $f1 \, 1);
+#X obj 150 240 loadbang;
+#X text 200 290 if the button has been pressed for 2 times \, start
+count from 1 again, f 35;
+#X text 20 180 dsp on;
+#X text 100 30 receive the midi value from button 8 and send bang to
+[pd welcome] [pd chordSyn], f 40;
+#X text 60 450 if 1 \, play welcome audio and background chord, f
+24;
+#X text 220 450 if 0 \, play bye audio and mute background chord,
+f 24;
+#X connect 3 0 1 0;
+#X connect 3 0 14 0;
+#X connect 3 0 15 0;
+#X connect 3 0 17 0;
+#X connect 4 0 5 0;
+#X connect 4 0 12 0;
+#X connect 4 1 6 0;
+#X connect 4 1 9 0;
+#X connect 5 0 7 0;
+#X connect 6 0 8 0;
+#X connect 9 0 10 0;
+#X connect 12 0 11 0;
+#X connect 13 0 3 0;
+#X connect 14 0 2 0;
+#X connect 16 0 13 0;
+#X connect 17 0 20 0;
+#X connect 18 0 4 0;
+#X connect 20 0 17 0;
+#X connect 20 0 18 0;
+#X connect 21 0 17 0;
+#X restore 570 220 pd button8;
+#X text 270 120 midi input value from buttons 1 - 8;
+#N canvas 902 302 427 439 button6 0;
+#X obj 110 30 cnv 15 219 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 140 190 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 110 130 1;
+#X obj 110 160 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 110 100 inlet;
+#X obj 110 240 cup;
+#X floatatom 140 270 5 0 0 0 - - -, f 5;
+#X text 30 260 count bang times;
+#X obj 140 240 expr if($f1 < 3 \, $f1 \, 1);
+#X obj 50 180 r onoff;
+#X msg 50 210 1;
+#X obj 140 300 select 1 2;
+#X msg 140 330 0;
+#X msg 190 330 1;
+#X obj 120 360 s 0todrums;
+#X obj 190 360 s 0todrums;
+#X obj 140 210 s disdrums;
+#X text 110 30 receive the midi value from button 6 and send bang to
+toggle drums on and off [pd drums], f 36;
+#X text 180 260 if the button has been pressed for 2 times \, start
+count from 1 again, f 35;
+#X text 120 380 send toggle on and off to [pd drums], f 22;
+#X connect 1 0 16 0;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 3 0 1 0;
+#X connect 4 0 2 0;
+#X connect 5 0 8 0;
+#X connect 6 0 11 0;
+#X connect 8 0 5 0;
+#X connect 8 0 6 0;
+#X connect 9 0 10 0;
+#X connect 10 0 5 0;
+#X connect 11 0 12 0;
+#X connect 11 1 13 0;
+#X connect 12 0 14 0;
+#X connect 13 0 15 0;
+#X restore 430 220 pd button6;
+#N canvas 917 284 394 457 button2 0;
+#X obj 80 20 cnv 15 250 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 150 160 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 190 120 1;
+#X msg 150 120 0;
+#X floatatom 100 220 5 0 0 0 - - -, f 5;
+#X obj 100 190 spigot;
+#X obj 100 250 s rev;
+#X obj 170 190 s byp;
+#X obj 70 250 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 #fcfcfc
+#000000 #000000 12700 1;
+#X obj 150 220 s ui5;
+#X obj 70 400 s verbfdis;
+#X obj 70 160 r lightlv;
+#X obj 150 90 inlet;
+#X obj 190 90 inlet;
+#X text 170 150 toggles the process of sending out values on and off
+, f 29;
+#X text 100 280 send brightness value to reverb volume controller,
+f 26;
+#X text 80 20 receive the midi value from button 2 and forward the
+brightness value to reverb volume controller [pd leadSyn], f 41;
+#X connect 1 0 5 1;
+#X connect 1 0 7 0;
+#X connect 1 0 9 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 8 0 10 0;
+#X connect 11 0 5 0;
+#X connect 12 0 3 0;
+#X connect 13 0 2 0;
+#X restore 150 220 pd button2;
+#N canvas 263 132 593 594 button3 0;
+#X obj 150 30 cnv 15 292 29 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 240 320 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X floatatom 170 500 5 0 0 0 - - -, f 5;
+#X obj 170 370 spigot;
+#X obj 170 530 s freq;
+#X obj 170 470 int;
+#X obj 220 370 s byp;
+#X obj 200 180 s ui2;
+#X obj 170 320 r lightlv;
+#X msg 270 270 1;
+#X msg 300 270 1;
+#X msg 330 270 1;
+#X obj 270 240 select 1 2 3 4;
+#X msg 360 270 0;
+#X msg 240 120 1;
+#X obj 260 370 s disnote;
+#X obj 270 320 s 1tooc1;
+#X obj 300 340 s 1tooc2;
+#X obj 330 320 s 1tooc3;
+#X obj 360 340 s 0tooc3;
+#X obj 100 320 r bypnote;
+#X obj 80 350 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 170 410 spigot;
+#X obj 100 290 r onoff;
+#X obj 90 260 r 1tonote;
+#X obj 80 230 r 0tonote;
+#X obj 240 90 inlet;
+#X obj 240 150 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 240 180 cup;
+#X floatatom 270 210 5 0 0 0 - - -, f 5;
+#X obj 270 180 expr if($f1 < 5 \, $f1 \, 1);
+#X text 310 200 if the button has been pressed for 4 times \, start
+count from 1 again, f 35;
+#X text 160 200 count bang times;
+#X text 170 240 toggles the process of sending out values on and off
+, f 12;
+#X text 220 400 send out the value for the first 3 bang \, stop sending
+at the 4th bang, f 34;
+#X text 220 520 send brightness value to [pd pianoNotes], f 22;
+#X text 150 30 receive the midi value from button 3 and forward the
+brightness value to [pd pianoNotes], f 48;
+#X obj 290 120 r onoff;
+#X obj 170 440 * 8;
+#X connect 1 0 3 1;
+#X connect 1 0 6 0;
+#X connect 1 0 15 0;
+#X connect 2 0 4 0;
+#X connect 3 0 22 0;
+#X connect 5 0 2 0;
+#X connect 8 0 3 0;
+#X connect 9 0 1 0;
+#X connect 9 0 16 0;
+#X connect 10 0 1 0;
+#X connect 10 0 17 0;
+#X connect 11 0 1 0;
+#X connect 11 0 18 0;
+#X connect 12 0 9 0;
+#X connect 12 1 10 0;
+#X connect 12 2 11 0;
+#X connect 12 3 13 0;
+#X connect 13 0 1 0;
+#X connect 13 0 19 0;
+#X connect 14 0 27 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 1;
+#X connect 22 0 38 0;
+#X connect 23 0 21 0;
+#X connect 24 0 21 0;
+#X connect 25 0 21 0;
+#X connect 26 0 14 0;
+#X connect 27 0 28 0;
+#X connect 27 0 7 0;
+#X connect 28 0 30 0;
+#X connect 29 0 12 0;
+#X connect 30 0 28 0;
+#X connect 30 0 29 0;
+#X connect 37 0 27 0;
+#X connect 38 0 5 0;
+#X restore 220 220 pd button3;
+#N canvas 231 95 705 605 button4 0;
+#X obj 190 40 cnv 15 309 29 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 120 170 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X msg 160 140 1;
+#X msg 120 140 0;
+#X obj 490 320 spigot;
+#X floatatom 490 440 5 0 0 0 - - -, f 5;
+#X obj 490 380 int;
+#X obj 490 470 s rand;
+#X obj 540 260 r byp;
+#X msg 540 290 0;
+#X obj 80 230 s ui3;
+#X obj 120 200 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 520 230 r stopranres;
+#X obj 440 140 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 440 110 r disap;
+#X obj 440 260 s offopran;
+#X obj 440 200 select 0 1;
+#X msg 440 230 1;
+#X msg 470 230 0;
+#X obj 440 290 r lightlv;
+#X msg 210 320 0;
+#X msg 150 320 1;
+#X obj 150 290 select 1 2 3;
+#X obj 150 410 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 180 320 1;
+#X obj 100 440 s disap;
+#X obj 180 350 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 180 380 0;
+#X obj 180 410 s stopranres;
+#X obj 210 380 s dissetran;
+#X msg 180 470 0;
+#X obj 150 500 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 150 530 s bypnote;
+#X obj 150 440 select 0 1;
+#X msg 150 470 1;
+#X obj 210 350 s 0tometro;
+#X obj 110 350 s 1tometro;
+#X obj 120 110 inlet;
+#X obj 160 110 inlet;
+#X floatatom 150 260 5 0 0 0 - - -, f 5;
+#X obj 120 230 cup;
+#X obj 150 230 expr if($f1 < 4 \, $f1 \, 1);
+#X obj 460 170 s tospi1;
+#X obj 510 200 r tospi1;
+#X text 40 250 count bang times;
+#X text 190 250 if the button has been pressed for 3 times \, start
+count from 1 again, f 35;
+#X text 350 460 send brightness value to [pd pianoNotes], f 22;
+#X text 540 320 toggles the process of sending out values on and off
+, f 19;
+#X obj 490 410 max 60;
+#X obj 490 350 * 140;
+#X obj 150 170 r onoff;
+#X text 190 40 receive the midi value from button 4 and forward the
+brightness value to auto pilot [pd pianoNotes], f 51;
+#X connect 1 0 11 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 49 0;
+#X connect 5 0 7 0;
+#X connect 6 0 48 0;
+#X connect 8 0 9 0;
+#X connect 9 0 4 1;
+#X connect 11 0 10 0;
+#X connect 11 0 40 0;
+#X connect 12 0 4 1;
+#X connect 13 0 16 0;
+#X connect 13 0 42 0;
+#X connect 14 0 13 0;
+#X connect 16 0 17 0;
+#X connect 16 1 18 0;
+#X connect 17 0 15 0;
+#X connect 18 0 15 0;
+#X connect 19 0 4 0;
+#X connect 20 0 23 0;
+#X connect 20 0 35 0;
+#X connect 21 0 23 0;
+#X connect 21 0 36 0;
+#X connect 22 0 21 0;
+#X connect 22 1 24 0;
+#X connect 22 2 20 0;
+#X connect 23 0 25 0;
+#X connect 23 0 33 0;
+#X connect 24 0 23 0;
+#X connect 24 0 26 0;
+#X connect 26 0 27 0;
+#X connect 26 0 29 0;
+#X connect 27 0 28 0;
+#X connect 30 0 31 0;
+#X connect 31 0 32 0;
+#X connect 33 0 34 0;
+#X connect 33 1 30 0;
+#X connect 34 0 31 0;
+#X connect 37 0 3 0;
+#X connect 38 0 2 0;
+#X connect 39 0 22 0;
+#X connect 40 0 41 0;
+#X connect 41 0 40 0;
+#X connect 41 0 39 0;
+#X connect 43 0 4 1;
+#X connect 48 0 5 0;
+#X connect 49 0 6 0;
+#X connect 50 0 11 0;
+#X restore 290 220 pd button4;
+#N canvas 843 445 294 300 button5 0;
+#X obj 40 30 cnv 15 219 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 70 170 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X msg 110 130 1;
+#X msg 70 130 0;
+#X obj 70 200 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 70 230 s oscchange;
+#X obj 70 100 inlet;
+#X obj 110 100 inlet;
+#X text 90 190 send brightness value to reverb volume controller,
+f 26;
+#X text 40 30 receive the midi value from button 5 and send bang to
+change wave-types [pd leadSyn], f 36;
+#X connect 1 0 4 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 3 0;
+#X connect 7 0 2 0;
+#X restore 360 220 pd button5;
+#X text 80 0 <-- low-pass filer (unused);
+#X text 70 30 receive the midi input value from buttons 1 - 8 and perform
+certain actions such as forward the brightness value to parameter controllers
+or toggle on and off the process of sending out values, f 96;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 3 1 4 1;
+#X connect 3 2 10 0;
+#X connect 3 3 10 1;
+#X connect 3 4 11 0;
+#X connect 3 5 11 0;
+#X connect 3 6 12 0;
+#X connect 3 7 12 1;
+#X connect 3 8 13 0;
+#X connect 3 9 13 1;
+#X connect 3 10 9 0;
+#X connect 3 11 9 0;
+#X connect 3 12 6 0;
+#X connect 3 13 6 1;
+#X connect 3 14 7 0;
+#X connect 3 15 7 0;
+#X restore 60 140 pd buttons;
+#X text 350 230 Input Signal;
+#X obj 240 380 tgl 99 0 empty ui1 empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X text 240 360 Volume;
+#X obj 360 380 tgl 99 0 empty ui5 empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 240 250 tgl 99 0 empty ui7 empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 810 250 tgl 99 0 empty ui8 empty 17 7 0 10 #fcfcfc #000000 #000000
+1 1;
+#X obj 720 380 tgl 49 0 empty saw empty 17 7 0 10 #fcfcfc #000000 #000000
+1 1;
+#X text 360 360 Reverb;
+#X text 240 230 Pitch Shifter;
+#X text 810 230 On/Off;
+#X obj 300 560 bng 59 250 50 0 empty n1 empty 17 7 0 10 #fcfcfc #fffb00
+#000000;
+#X obj 370 560 bng 59 250 50 0 empty n2 empty 17 7 0 10 #fcfcfc #009193
+#000000;
+#X obj 440 560 bng 59 250 50 0 empty n3 empty 17 7 0 10 #fcfcfc #942193
+#000000;
+#X obj 510 560 bng 59 250 50 0 empty n4 empty 17 7 0 10 #fcfcfc #ff2f92
+#000000;
+#X obj 580 560 bng 59 250 50 0 empty n5 empty 17 7 0 10 #fcfcfc #ff2600
+#000000;
+#X obj 650 560 bng 59 250 50 0 empty n6 empty 17 7 0 10 #fcfcfc #941100
+#000000;
+#X obj 720 560 bng 59 250 50 0 empty n7 empty 17 7 0 10 #fcfcfc #ff9300
+#000000;
+#X obj 790 560 bng 59 250 50 0 empty n8 empty 17 7 0 10 #fcfcfc #fffb00
+#000000;
+#X obj 440 670 bng 59 250 50 0 empty dischord1 empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 510 670 bng 59 250 50 0 empty dischord2 empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 580 670 bng 59 250 50 0 empty dischord3 empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 650 670 bng 59 250 50 0 empty dischord4 empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 440 650 Chord 1;
+#X text 510 650 Chord 2;
+#X text 580 650 Chord 3;
+#X text 650 650 Chord 4;
+#X text 370 540 D;
+#X text 440 540 E;
+#X text 510 540 F;
+#X text 580 540 G;
+#X text 650 540 A;
+#X text 720 540 B;
+#X text 790 540 C;
+#X text 300 540 Middle-C;
+#X obj 720 460 tgl 49 0 empty sine empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X text 720 360 Saw;
+#X text 720 440 Sine;
+#X obj 350 250 hsl 444 99 0 1 0 0 empty mainfader empty -2 -8 0 10
+#fcfcfc #000000 #000000 7433 1;
+#X obj 240 490 hsl 94 19 0 1 0 0 empty levelfdis empty -2 -8 0 10 #fcfcfc
+#000000 #000000 4531 1;
+#X obj 360 490 hsl 94 19 0 1 0 0 empty verbfdis empty -2 -8 0 10 #fcfcfc
+#000000 #000000 9300 1;
+#N canvas 739 275 396 330 welcome 0;
+#X obj 40 20 cnv 15 298 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X obj 40 170 readsf~;
+#X obj 40 280 dac~;
+#X obj 40 90 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 220 90 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 40 60 r welcome;
+#X obj 220 60 r bye;
+#X obj 40 220 *~ 3;
+#X msg 40 120 open audio/welcome.wav \, 1;
+#X msg 220 120 open audio/bye.wav \, 1;
+#X text 40 20 trigger audio when on and off buttons are pressed;
+#X connect 1 0 7 0;
+#X connect 3 0 8 0;
+#X connect 4 0 9 0;
+#X connect 5 0 3 0;
+#X connect 6 0 4 0;
+#X connect 7 0 2 0;
+#X connect 7 0 2 1;
+#X connect 8 0 1 0;
+#X connect 9 0 1 0;
+#X restore 60 100 pd welcome;
+#X floatatom 620 230 5 0 0 0 - dislightlv -, f 5;
+#X text 510 230 Room light level;
+#X text 660 230 <-- should be below 30;
+#X obj 250 170 cnv 15 60 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 350 90 cnv 15 20 99 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 330 170 cnv 15 60 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 330 90 cnv 15 60 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 410 90 cnv 15 20 100 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 420 170 cnv 15 60 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 410 90 cnv 15 70 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 460 140 cnv 15 20 47 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 440 130 cnv 15 40 20 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 500 90 cnv 15 20 99 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 500 130 cnv 15 60 20 empty empty empty 20 12 0 14 #9e9e9e #404040
+0;
+#X obj 550 90 cnv 15 20 99 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 610 90 cnv 15 20 99 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 590 90 cnv 15 60 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 720 90 cnv 15 20 100 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 730 170 cnv 15 60 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 720 90 cnv 15 70 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 770 90 cnv 15 20 83 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 810 90 cnv 15 20 99 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 870 90 cnv 15 20 99 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 850 150 cnv 15 19 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 830 110 cnv 15 19 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 840 130 cnv 15 19 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 820 90 cnv 15 19 20 empty empty empty 20 12 0 14 #979797 #404040
+0;
+#X obj 860 170 cnv 15 19 19 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 260 160 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 360 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 340 160 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 340 80 cnv 15 60 20 empty empty empty 20 12 0 14 #fed37a #404040
+0;
+#X obj 420 80 cnv 15 20 100 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 430 160 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 420 80 cnv 15 70 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 470 120 cnv 15 20 47 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 450 120 cnv 15 40 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 510 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 510 120 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 560 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 620 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 600 80 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 730 80 cnv 15 20 100 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 740 160 cnv 15 60 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 730 80 cnv 15 70 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 780 80 cnv 15 20 83 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 820 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 880 80 cnv 15 20 99 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 860 140 cnv 15 19 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 840 100 cnv 15 19 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 850 120 cnv 15 19 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 830 80 cnv 15 19 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 870 160 cnv 15 19 19 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 250 90 cnv 15 20 99 empty empty empty 20 12 0 14 #a3a3a3 #404040
+0;
+#X obj 260 80 cnv 15 20 100 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#N canvas 1374 315 440 459 chordRandom 0;
+#X floatatom 160 300 5 0 0 0 - - -, f 5;
+#X obj 160 270 random 4;
+#X obj 160 330 select 0 1 2 3;
+#X obj 160 380 s chord1;
+#X obj 180 400 s chord2;
+#X obj 200 360 s chord3;
+#X obj 220 380 s chord4;
+#X obj 130 180 cup;
+#X floatatom 160 210 5 0 0 0 - - -, f 5;
+#X text 200 200 if the button has been pressed for 4 times \, start
+count from 1 again, f 35;
+#X text 50 200 count bang times;
+#X obj 130 90 r onoff;
+#X obj 130 120 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 130 150 1;
+#X obj 160 180 expr if($f1 < 17 \, $f1 \, 1);
+#X obj 160 240 select 1;
+#X obj 40 150 r chordrandom;
+#X obj 90 30 cnv 15 219 29 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 90 30 receive bpm values from [pd mainBPM] and play 4 random
+chords, f 36;
+#X text 40 130 bpm values;
+#X text 220 270 random from 0-3;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 2 2 5 0;
+#X connect 2 3 6 0;
+#X connect 7 0 14 0;
+#X connect 8 0 15 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 13 0 7 0;
+#X connect 14 0 7 0;
+#X connect 14 0 8 0;
+#X connect 15 0 1 0;
+#X connect 16 0 7 0;
+#X restore 60 220 pd chordRandom;
+#N canvas 528 154 767 596 cutoffThreshold 1;
+#X floatatom 120 140 5 0 0 0 - - -, f 5;
+#X obj 497 198 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X floatatom 557 258 5 0 0 0 - - -, f 5;
+#X obj 497 228 delay 50;
+#X obj 150 500 select 1 2;
+#X obj 357 138 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 447 298 line;
+#X floatatom 447 328 5 0 0 0 - - -, f 5;
+#X floatatom 447 168 5 0 0 0 - - -, f 5;
+#X obj 447 198 float;
+#X floatatom 447 228 5 0 0 0 - - -, f 5;
+#X msg 417 168 0;
+#X obj 357 168 delay 50;
+#X obj 120 380 change;
+#X msg 120 350 1;
+#X obj 120 410 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 150 350 2;
+#X floatatom 120 230 5 0 0 0 - - -, f 5;
+#X obj 120 200 int;
+#X obj 447 358 s cutoff;
+#X obj 120 110 r lightlv;
+#X obj 120 170 * 100;
+#X obj 120 320 select 10 15;
+#X obj 557 228 r cutofflv;
+#X obj 447 138 r cutofflv;
+#X floatatom 120 290 5 0 0 0 - - -, f 5;
+#X obj 120 260 clip 10 15;
+#X msg 170 230 10;
+#X msg 200 230 15;
+#X obj 170 200 r onoff;
+#X obj 130 530 s cutoffs1;
+#X obj 200 530 s cutoffs2;
+#X obj 357 108 r cutoffs1;
+#X obj 497 168 r cutoffs2;
+#X obj 120 440 cup;
+#X floatatom 150 470 5 0 0 0 - - -, f 5;
+#X text 40 460 count bang times;
+#X obj 150 440 expr if($f1 < 3 \, $f1 \, 1);
+#X text 190 460 if the button has been pressed for 2 times \, start
+count from 1 again, f 35;
+#X msg 447 258 \$1 500;
+#X obj 220 30 cnv 15 352 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 220 30 receive brightness level from [pd midiInput] and determine
+the minimum threshold \, whenever the brightness is below that threshold
+\, leadSyn volume is set to 0, f 58;
+#X text 167 138 brightness level;
+#X text 187 258 select values range of 10-15, f 15;
+#X text 187 348 if brightness value hit 10 \, send 1 \, if value hit
+15 \, send 2, f 21;
+#X text 307 228 current leadSyn volume;
+#X text 307 298 ramp up the value from 0 to current volume, f 22;
+#X text 397 378 final leadSyn volume \, which is sent back to [pd leadSyn]
+, f 28;
+#X text 597 258 current leadSyn volume;
+#X text 500 290 ramp down the value from current volume to 0, f 19
+;
+#X msg 500 260 0 100;
+#X connect 0 0 21 0;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 2 0 6 0;
+#X connect 3 0 50 0;
+#X connect 4 0 30 0;
+#X connect 4 1 31 0;
+#X connect 5 0 11 0;
+#X connect 5 0 12 0;
+#X connect 6 0 7 0;
+#X connect 7 0 19 0;
+#X connect 8 0 9 1;
+#X connect 9 0 10 0;
+#X connect 10 0 39 0;
+#X connect 11 0 6 0;
+#X connect 12 0 9 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 0;
+#X connect 15 0 34 0;
+#X connect 16 0 13 0;
+#X connect 17 0 26 0;
+#X connect 18 0 17 0;
+#X connect 20 0 0 0;
+#X connect 21 0 18 0;
+#X connect 22 0 14 0;
+#X connect 22 1 16 0;
+#X connect 23 0 2 0;
+#X connect 24 0 8 0;
+#X connect 25 0 22 0;
+#X connect 26 0 25 0;
+#X connect 27 0 26 1;
+#X connect 28 0 26 2;
+#X connect 29 0 27 0;
+#X connect 29 0 28 0;
+#X connect 32 0 5 0;
+#X connect 33 0 1 0;
+#X connect 34 0 37 0;
+#X connect 35 0 4 0;
+#X connect 37 0 34 0;
+#X connect 37 0 35 0;
+#X connect 39 0 6 0;
+#X connect 50 0 6 0;
+#X restore 60 280 pd cutoffThreshold;
+#X text 40 60 PD subpatch menu;
+#X text 40 100 1);
+#X text 40 120 2);
+#X text 40 140 3);
+#X text 40 160 4);
+#X text 40 180 5);
+#X text 40 200 6);
+#X text 40 220 7);
+#X text 40 240 8);
+#X text 40 260 9);
+#X text 40 80 ---------------------;
+#N canvas 553 157 1124 692 drums 0;
+#X obj 200 160 readsf~ 2;
+#X msg 200 130 open audio/HH1.wav \, 1;
+#X obj 50 160 readsf~ 2;
+#X msg 50 130 open audio/kick.wav \, 1;
+#X obj 480 160 readsf~ 2;
+#X msg 480 130 open audio/snare.wav \, 1;
+#X obj 640 160 readsf~ 2;
+#X obj 480 90 r tosnare;
+#X obj 200 90 r tohh;
+#X obj 50 90 r tokick;
+#X obj 790 160 readsf~ 2;
+#X obj 640 90 r toper1;
+#X obj 790 90 r toper2;
+#X msg 790 130 open audio/per2.wav \, 1;
+#X obj 940 160 readsf~ 2;
+#X msg 640 130 open audio/per1.wav \, 1;
+#X obj 940 90 r toper3;
+#X msg 940 130 open audio/per3.wav \, 1;
+#X obj 110 90 r tokickex;
+#X obj 340 160 readsf~ 2;
+#X msg 340 130 open audio/OH.wav \, 1;
+#X obj 340 90 r tooh;
+#X obj 50 190 *~ 0.8;
+#X obj 100 190 *~ 0.8;
+#X obj 480 190 *~ 0.65;
+#X obj 530 190 *~ 0.65;
+#X obj 640 190 *~ 0.5;
+#X obj 690 190 *~ 0.3;
+#X obj 790 190 *~ 0.3;
+#X obj 840 190 *~ 0.5;
+#X obj 340 190 *~ 0.6;
+#X obj 940 190 *~ 0.3;
+#X obj 990 190 *~ 0.3;
+#X obj 200 190 *~ 0.6;
+#X obj 250 190 *~ 0.3;
+#X obj 390 190 *~ 0.3;
+#X obj 480 630 dac~;
+#N canvas 1113 223 368 260 drumsVolume 0;
+#X floatatom 80 110 5 0 0 0 - - -, f 5;
+#X obj 80 80 r chordlevel;
+#X obj 80 200 outlet;
+#X floatatom 80 170 5 0 0 0 - - -, f 5;
+#X obj 80 140 expr if($f1 > 0.3 \, $f1 * 1.7 \, 0.3);
+#X obj 50 30 cnv 15 262 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 50 30 change drums volume according to chordlevel;
+#X text 120 110 chord level;
+#X text 120 160 if chordlevel is > than 0.3 \, output chordlevel x
+1.7 \, else 0.3, f 34;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 0;
+#X restore 620 410 pd drumsVolume;
+#X obj 480 460 *~ 0.3;
+#X obj 530 460 *~ 0.3;
+#X obj 530 600 spigot~;
+#X obj 610 570 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 480 600 spigot~;
+#X obj 590 570 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 630 540 r 0todrums;
+#X obj 620 520 r 1todrums;
+#N canvas 1237 308 348 468 drumsDisplay 0;
+#X obj 80 80 r tokick;
+#X obj 140 80 r tokickex;
+#X obj 140 110 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 140 170 s kickdis;
+#X obj 140 290 s hhdis;
+#X obj 140 410 s snrdis;
+#X obj 140 200 r tohh;
+#X obj 140 140 spigot;
+#X obj 180 110 r disdrums;
+#X obj 140 230 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 140 260 spigot;
+#X obj 180 230 r disdrums;
+#X obj 140 350 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 140 380 spigot;
+#X obj 180 350 r disdrums;
+#X obj 140 320 r tosnare;
+#X obj 30 30 cnv 15 280 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 30 30 send bang whenever drums samples are played, f 46;
+#X connect 0 0 2 0;
+#X connect 1 0 2 0;
+#X connect 2 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 3 0;
+#X connect 8 0 7 1;
+#X connect 9 0 10 0;
+#X connect 10 0 4 0;
+#X connect 11 0 10 1;
+#X connect 12 0 13 0;
+#X connect 13 0 5 0;
+#X connect 14 0 13 1;
+#X connect 15 0 12 0;
+#X restore 0 40 pd drumsDisplay;
+#N canvas 1180 417 480 466 percPlay 0;
+#N canvas 1183 433 321 274 bpm 0;
+#X obj 50 90 inlet;
+#X obj 150 190 metro;
+#X msg 50 150 tempo \$1 permin;
+#X obj 150 220 outlet;
+#X obj 150 110 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 150 80 r onoff;
+#X obj 50 120 * 4;
+#X msg 170 150 tempo 240 permin;
+#X obj 60 30 cnv 15 196 16 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 60 30 convert auto pilot values to BPM;
+#X connect 0 0 6 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 1 0;
+#X connect 4 0 7 0;
+#X connect 5 0 4 0;
+#X connect 6 0 2 0;
+#X connect 7 0 1 0;
+#X restore 160 160 pd bpm;
+#X floatatom 160 130 5 0 0 0 - - -, f 5;
+#X obj 160 100 r rand;
+#X obj 160 190 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 160 220 cup;
+#X floatatom 190 250 5 0 0 0 - - -, f 5;
+#X text 80 240 count bang times;
+#X obj 50 400 s toper1;
+#X obj 190 400 s toper2;
+#X obj 120 400 s toper3;
+#X floatatom 70 340 5 0 0 0 - - -, f 5;
+#X obj 70 370 select 0 1;
+#X obj 70 310 random 2;
+#X floatatom 190 340 5 0 0 0 - - -, f 5;
+#X obj 190 310 random 2;
+#X obj 190 370 select 0;
+#X obj 270 310 s tokickex;
+#X obj 350 310 s tooh;
+#X obj 190 220 expr if($f1 < 33 \, $f1 \, 1);
+#X obj 70 280 select 11 17 27 31;
+#X obj 270 280 select 17 25;
+#X obj 190 280 select 13 29;
+#X obj 350 280 select 32;
+#X obj 110 30 cnv 15 261 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 200 130 auto pilot values from [pd button4];
+#X text 210 160 convert that value to the actual BPM;
+#X text 230 240 if the bang has been sent for 32 times \, start count
+from 1 again, f 35;
+#X text 110 30 receive auto pilot values from [pd button4] and send
+bang to play percussion sameples, f 43;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 4 0 18 0;
+#X connect 5 0 19 0;
+#X connect 5 0 20 0;
+#X connect 5 0 21 0;
+#X connect 5 0 22 0;
+#X connect 10 0 11 0;
+#X connect 11 0 7 0;
+#X connect 11 1 9 0;
+#X connect 12 0 10 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 0;
+#X connect 15 0 8 0;
+#X connect 18 0 4 0;
+#X connect 18 0 5 0;
+#X connect 19 0 12 0;
+#X connect 19 1 12 0;
+#X connect 19 2 12 0;
+#X connect 19 3 12 0;
+#X connect 20 0 16 0;
+#X connect 20 1 16 0;
+#X connect 21 0 14 0;
+#X connect 21 1 14 0;
+#X connect 22 0 17 0;
+#X restore 0 0 pd percPlay;
+#N canvas 953 452 430 262 drumsPlay 0;
+#X obj 110 120 cup;
+#X floatatom 140 150 5 0 0 0 - - -, f 5;
+#X obj 140 120 expr if($f1 < 5 \, $f1 \, 1);
+#X text 180 140 if the button has been pressed for 4 times \, start
+count from 1 again, f 35;
+#X text 30 140 count bang times;
+#X obj 140 180 select 1 3;
+#X obj 200 210 s tosnare;
+#X obj 140 210 s tokick;
+#X obj 110 90 r tokicksnr;
+#X obj 90 30 cnv 15 249 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 90 30 receive bpm values from [pd mainBPM] and send bang to
+play kick and snare sameples, f 41;
+#X text 190 90 bpm from [pd mainBPM];
+#X connect 0 0 2 0;
+#X connect 1 0 5 0;
+#X connect 2 0 0 0;
+#X connect 2 0 1 0;
+#X connect 5 0 7 0;
+#X connect 5 1 6 0;
+#X connect 8 0 0 0;
+#X restore 0 20 pd drumsPlay;
+#X obj 610 500 r onoff;
+#X obj 340 30 cnv 15 358 30 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#N canvas 712 359 264 237 drumsReverb 0;
+#X obj 70 80 inlet~;
+#X obj 70 180 outlet~;
+#X obj 120 180 outlet~;
+#X obj 70 110 rev2~ 100 80 3000 20;
+#X obj 70 150 *~ 0.08;
+#X obj 120 150 *~ 0.08;
+#X obj 50 30 cnv 15 171 17 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 50 30 reverb aux for drums samples;
+#X connect 0 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
+#X restore 480 530 pd drumsReverb;
+#X text 340 30 main patch for playing drums samples \, receive bang
+from [pd percPlay and drumsPlay] and read sound files in stereo;
+#X text 580 460 drums volume;
+#X text 720 410 change drums volume according to chordlevel;
+#X text 330 530 subpatch for reverb aux;
+#X text 90 20 subpatch for playing drums;
+#X text 80 0 subpatch for playing percussions;
+#X text 100 40 subpatch for displaying drums;
+#X connect 0 0 33 0;
+#X connect 0 1 34 0;
+#X connect 1 0 0 0;
+#X connect 2 0 22 0;
+#X connect 2 1 23 0;
+#X connect 3 0 2 0;
+#X connect 4 0 24 0;
+#X connect 4 1 25 0;
+#X connect 5 0 4 0;
+#X connect 6 0 26 0;
+#X connect 6 1 27 0;
+#X connect 7 0 5 0;
+#X connect 8 0 1 0;
+#X connect 9 0 3 0;
+#X connect 10 0 28 0;
+#X connect 10 1 29 0;
+#X connect 11 0 15 0;
+#X connect 12 0 13 0;
+#X connect 13 0 10 0;
+#X connect 14 0 31 0;
+#X connect 14 1 32 0;
+#X connect 15 0 6 0;
+#X connect 16 0 17 0;
+#X connect 17 0 14 0;
+#X connect 18 0 3 0;
+#X connect 19 0 30 0;
+#X connect 19 1 35 0;
+#X connect 20 0 19 0;
+#X connect 21 0 20 0;
+#X connect 22 0 38 0;
+#X connect 23 0 39 0;
+#X connect 24 0 38 0;
+#X connect 25 0 39 0;
+#X connect 26 0 38 0;
+#X connect 27 0 39 0;
+#X connect 28 0 38 0;
+#X connect 29 0 39 0;
+#X connect 30 0 38 0;
+#X connect 31 0 38 0;
+#X connect 32 0 39 0;
+#X connect 33 0 38 0;
+#X connect 34 0 39 0;
+#X connect 35 0 39 0;
+#X connect 37 0 38 1;
+#X connect 37 0 39 1;
+#X connect 38 0 51 0;
+#X connect 38 0 42 0;
+#X connect 39 0 51 0;
+#X connect 39 0 40 0;
+#X connect 40 0 36 1;
+#X connect 41 0 40 1;
+#X connect 42 0 36 0;
+#X connect 43 0 42 1;
+#X connect 44 0 41 0;
+#X connect 44 0 43 0;
+#X connect 45 0 41 0;
+#X connect 45 0 43 0;
+#X connect 49 0 43 0;
+#X connect 49 0 41 0;
+#X connect 51 0 42 0;
+#X connect 51 1 40 0;
+#X restore 60 240 pd drums;
+#X obj 790 380 tgl 49 0 empty disdrums empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 850 460 bng 49 250 50 0 empty kickdis empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 790 460 bng 49 250 50 0 empty snrdis empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 850 380 bng 49 250 50 0 empty hhdis empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 850 360 Hi-hat;
+#X text 790 440 Snare;
+#X text 850 440 Kick;
+#X text 790 360 Drums;
+#X obj 490 490 tgl 19 0 empty disnoc1 1 6 8 0 10 #fcfcfc #000000 #000000
+0 1;
+#X text 480 360 Note;
+#X obj 480 380 tgl 99 0 empty disnote empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 520 490 tgl 19 0 empty disnoc2 2 6 8 0 10 #fcfcfc #000000 #000000
+1 1;
+#X obj 550 490 tgl 19 0 empty disnoc3 3 6 8 0 10 #fcfcfc #000000 #000000
+0 1;
+#X text 600 360 Auto Pilot;
+#X obj 600 380 tgl 99 0 empty disap empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 680 490 bng 19 250 50 0 empty dissetran S 6 8 0 10 #fcfcfc #000000
+#000000;
+#X obj 600 490 hsl 64 19 60 140 0 0 empty rand empty -2 -8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X text 40 280 10);
+#N canvas 809 292 229 395 mainBPM 0;
+#N canvas 395 429 307 269 bpm 0;
+#X obj 40 90 inlet;
+#X obj 140 190 metro;
+#X msg 40 150 tempo \$1 permin;
+#X obj 140 220 outlet;
+#X obj 140 110 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 1 1;
+#X obj 140 80 r onoff;
+#X obj 40 120 * 2;
+#X msg 160 150 tempo 120 permin;
+#X obj 50 30 cnv 15 196 16 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 50 30 convert auto pilot values to BPM;
+#X connect 0 0 6 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 1 0;
+#X connect 4 0 7 0;
+#X connect 5 0 4 0;
+#X connect 6 0 2 0;
+#X connect 7 0 1 0;
+#X restore 60 190 pd bpm;
+#X floatatom 60 160 5 0 0 0 - - -, f 5;
+#X obj 60 220 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 100 260 s tohh;
+#X obj 60 130 r rand;
+#X obj 70 320 s toleadrandom;
+#X obj 90 280 s chordrandom;
+#X obj 80 300 s tokicksnr;
+#X obj 110 190 s tobpmdis;
+#X msg 110 160 60;
+#X obj 110 130 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 110 100 r onoff;
+#X obj 60 340 s todisbpm;
+#X obj 40 30 cnv 15 154 43 empty empty empty 20 12 0 14 #e0e0e0 #404040
+0;
+#X text 40 30 receive auto pilot values from [pd button4] and convert
+to the actual bpm, f 25;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 1 0 8 0;
+#X connect 2 0 3 0;
+#X connect 2 0 5 0;
+#X connect 2 0 6 0;
+#X connect 2 0 7 0;
+#X connect 2 0 12 0;
+#X connect 4 0 1 0;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 10 0;
+#X restore 60 300 pd mainBPM;
+#X text 40 300 11);
+#X obj 780 640 cnv 15 79 99 empty empty empty 20 12 0 14 #ffd479 #404040
+0;
+#X floatatom 820 650 5 0 0 0 - tobpmdis -, f 5;
+#X text 790 650 BPM;
+#X obj 790 670 bng 59 250 50 0 empty todisbpm empty 17 7 0 10 #fcfcfc
+#0091ff #000000;
+#X text 220 690 Developed by Aktera Teranontamongkol MSc Student in
+Audio and Music Technology at University of York, f 33;
+#X text 220 650 Light-ON Version 1.01 \, compatible with Micro:bit
+, f 33;
+#X obj 670 110 cnv 15 20 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 670 170 cnv 15 20 20 empty empty empty 20 12 0 14 #9a9a9a #404040
+0;
+#X obj 680 160 cnv 15 20 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
+#X obj 680 100 cnv 15 20 20 empty empty empty 20 12 0 14 #ffd47a #404040
+0;
