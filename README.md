@@ -1,5 +1,5 @@
 # LightOn
-<br/> This repository is a part of LIGHT:ON project, a non-physical contact sonification musical instrument, where the description of the files can be found below.
+<br/> This repository is a part of LIGHT:ON project, a contactless sonification musical instrument, where the description of the files can be found below.
 <br/>
 <br/> LightOn_Microbit.py - A python code for flashing micro:bit, developed in Mu Editor.
 <br/> LightOn_PD_patch.pd - A Purr Data patch, serves as a user interface and platform for performing sonification techniques.
